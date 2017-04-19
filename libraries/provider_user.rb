@@ -8,7 +8,7 @@ class ElasticsearchCookbook::UserProvider < Chef::Provider::LWRPBase
     false
   end
 
-  action :create do
+  def action_create
     group_r = group new_resource.groupname do
       gid new_resource.gid
       action :nothing
@@ -22,7 +22,8 @@ class ElasticsearchCookbook::UserProvider < Chef::Provider::LWRPBase
       shell   new_resource.shell
       uid     new_resource.uid
       gid     new_resource.groupname
-      supports(manage_home: false)
+
+      manage_home false
       action :nothing
       system true
     end
@@ -30,7 +31,7 @@ class ElasticsearchCookbook::UserProvider < Chef::Provider::LWRPBase
     new_resource.updated_by_last_action(true) if user_r.updated_by_last_action?
   end
 
-  action :remove do
+  def action_remove
     # delete user before deleting the group
     user_r = user new_resource.username do
       action :nothing

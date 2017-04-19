@@ -1,5 +1,54 @@
 # Change Log
 
+## [v3.1.0](https://github.com/elastic/cookbook-elasticsearch/tree/v3.1.0) (2017-04-18)
+- Add Chef 13.x support for this cookbook (#561)
+- Reintroduce chef_proxy settings (#557)
+
+## [v3.0.5](https://github.com/elastic/cookbook-elasticsearch/tree/v3.0.5) (2017-04-06)
+- Bump ES version to 5.3.0 (#550)
+- Fix permissions for elasticsearch.yml and log4j2.properties (#555)
+
+## [v3.0.4](https://github.com/elastic/cookbook-elasticsearch/tree/v3.0.4) (2017-03-02)
+- Bump ES version to 5.2.2 (#550)
+
+## [v3.0.3](https://github.com/elastic/cookbook-elasticsearch/tree/v3.0.3) (2017-02-09)
+- Fix URL support for plugins (#525)
+- Add support for versions 5.0.2, 5.1.1, 5.1.2, 5.2.0
+- Make 5.2.0 the default version
+- Add a note about upgrading to new versions (#527)
+- Foodcritic/Rubocop style cleanup
+- Fix ruby version build on travis
+- remove tarball directory recursively
+
+## [v3.0.2](https://github.com/elastic/cookbook-elasticsearch/tree/v3.0.2) (2016-11-29)
+
+- Ensure bin/elasticsearch-plugin uses the proper environment (#523)
+- Bump default Elasticsearch version from v5.0.0 to v5.0.1
+
+## [v3.0.1](https://github.com/elastic/cookbook-elasticsearch/tree/v3.0.1) (2016-11-09)
+
+- Fix incorrect MAX_MAP_COUNT default to be '262144' to match init scripts (#516)
+
+## [v3.0.0](https://github.com/elastic/cookbook-elasticsearch/tree/v3.0.0) (2016-11-07)
+
+Breaking changes that were needed for v5.0.0 support (#497, #512, #424, #478, #503):
+  - We dropped the fancy logic for figuring out the requested version of Elasticsearch to be installed. You should pass it on the resource or in the recipe, but we no longer do a bunch of logic to figure out what you meant -- we favor being explicit now.
+  - We now start the service by default, instead of only `:enable` but not `:start`.
+  - Dropped `gc_options` parameter of elasticsearch_configure, and now have `jvm.options`. We've also dropped thread_stack_size and env_options, as they aren't used in the upstream packaging as defaults anymore.
+  - Install the tarball and package files into the same locations. There's no more `/usr/local`.
+  - Install types are now 'strings', not :symbols. `node['elasticsearch'][<resource>][<param>]` sets any `elasticsearch::default` recipe.
+
+For more on breaking changes, read [3aa8740](https://github.com/elastic/cookbook-elasticsearch/commit/3aa8740da5182f4a29761e0ea350048764bc0752) and [1ccd013](https://github.com/elastic/cookbook-elasticsearch/commit/1ccd013821cbfe83197c1ebba7fdb3acadc3d88f).
+
+- Switch to the `manage_home false` property of newer Chef versions (#406)
+- Use YAML library directly from now on for elasticsearch.yml (#470)
+- Add support for Ubuntu 16.04 / CentOS 7.2, both using systemd (#501, #502)
+- Support and use 'repository' type on `elasticsearch_install` by default (#476)
+- Based on the latest v5.0.0 packages, tweak the permissions for some directories slightly (#513)
+- Drop preferIPv4 test (#475), discovery.zen.ping settings (#437), and others.
+- Add Java 8 testing by default (#510), bump newer Chef versions (#503, #505)
+- Start using exact plugin names, case sensitive (#485)
+
 ## [v2.4.0](https://github.com/elastic/cookbook-elasticsearch/tree/v2.4.0) (2016-09-15)
 
 - Update attributes for 2.3.5 and 2.4.0 versions. Use 2.4.0 version as default for installation and tests. [\#496](https://github.com/elastic/cookbook-elasticsearch/issues/496) and [\#490](https://github.com/elastic/cookbook-elasticsearch/issues/490)

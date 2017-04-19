@@ -1,5 +1,3 @@
-# Encoding: utf-8
-
 require_relative 'spec_helper'
 require_relative '../../../libraries/helpers.rb'
 
@@ -32,25 +30,25 @@ describe 'elasticsearch_test::default_with_plugins' do
         it 'installs elasticsearch with proxy host' do
           Chef::Config['http_proxy'] = 'http://example.com'
           args = get_java_proxy_arguments
-          expect(args).to eq('-DproxyHost=example.com -DproxyPort=80')
+          expect(args).to eq('-Dhttp.proxyHost=example.com -Dhttp.proxyPort=80 ')
         end
 
         it 'installs elasticsearch with proxy' do
           Chef::Config['http_proxy'] = 'http://example.com:8080'
           args = get_java_proxy_arguments
-          expect(args).to eq('-DproxyHost=example.com -DproxyPort=8080')
+          expect(args).to eq('-Dhttp.proxyHost=example.com -Dhttp.proxyPort=8080 ')
         end
 
         it 'installs elasticsearch with proxy host (ssl)' do
           Chef::Config['https_proxy'] = 'https://example.com'
           args = get_java_proxy_arguments
-          expect(args).to eq('-DproxyHost=example.com -DproxyPort=443')
+          expect(args).to eq('-Dhttps.proxyHost=example.com -Dhttps.proxyPort=443 ')
         end
 
         it 'installs elasticsearch with proxy (ssl)' do
           Chef::Config['https_proxy'] = 'https://example.com:8080'
           args = get_java_proxy_arguments
-          expect(args).to eq('-DproxyHost=example.com -DproxyPort=8080')
+          expect(args).to eq('-Dhttps.proxyHost=example.com -Dhttps.proxyPort=8080 ')
         end
       end
     end

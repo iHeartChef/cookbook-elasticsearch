@@ -8,7 +8,12 @@ shared_examples_for 'elasticsearch service' do |service_name = 'elasticsearch', 
     it { should be_running }
   end
 
-  describe command('curl http://localhost:9200') do
+  # always sleep before checking the service; it needs time to stabilize
+  describe command('sleep 30') do
+    its(:exit_status) { should eq 0 }
+  end
+
+  describe command('curl http://elastic:changeme@localhost:9200') do
     its(:stdout) { should match(/#{content_match}/) }
   end
 end

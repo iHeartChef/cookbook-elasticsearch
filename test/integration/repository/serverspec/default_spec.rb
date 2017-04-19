@@ -4,8 +4,10 @@ describe 'standard elasticsearch install and configure' do
   it_behaves_like 'elasticsearch user'
   it_behaves_like 'elasticsearch install'
   it_behaves_like 'elasticsearch configure'
-  it_behaves_like 'elasticsearch plugin', 'head'
+  it_behaves_like 'elasticsearch plugin', 'x-pack'
   it_behaves_like 'elasticsearch service'
+end
 
-  it_behaves_like 'chef version', '12.1.2'
+describe package('elasticsearch') do
+  it { should be_installed }
 end
